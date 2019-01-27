@@ -2,6 +2,41 @@ const assert = require("chai").assert;
 r = require("../src/replacers");
 
 describe("replacers", function() {
+	describe("rename()", function() {
+		describe("when given an array of filename objects", function() {
+			it("should populate the rename field with new file name", function() {
+				let original = [
+					{ name: "text", renamed: null, extension: ".txt" },
+					{ name: "text", renamed: null, extension: ".txt" },
+					{ name: "text", renamed: null, extension: ".txt" }
+				];
+
+				let expected = [
+					{
+						name: "text",
+						renamed: "New File Name S02E01",
+						extension: ".txt"
+					},
+					{
+						name: "text",
+						renamed: "New File Name S02E02",
+						extension: ".txt"
+					},
+					{
+						name: "text",
+						renamed: "New File Name S02E03",
+						extension: ".txt"
+					}
+				];
+
+				assert.deepEqual(
+					expected,
+					r.rename(original, "New File Name", 2, 1)
+				);
+			});
+		});
+	});
+
 	describe("twoDigitFormatter()", function() {
 		describe("when given a number", function() {
 			it("should return properly formatted number", function() {
