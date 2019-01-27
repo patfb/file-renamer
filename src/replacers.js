@@ -1,11 +1,3 @@
-let replacePeriods = (input) => {
-	return input.replace(".", " ");
-};
-
-let replaceDashes = (input) => {
-	return input.replace("-", " ");
-};
-
 let separateExtension = (input) => {
 	return input.slice(input.lastIndexOf("."));
 };
@@ -14,24 +6,25 @@ let onlyFileName = (input) => {
 	return input.slice(0, input.lastIndexOf("."));
 };
 
-let convertToFilenameObject = (originalFilenames) => {
-	let mappedFilenames = [];
+let convertToFileNameObject = (originalFileName) => {
+	return {
+		name: onlyFileName(originalFileName),
+		renamed: null,
+		extension: separateExtension(originalFileName)
+	};
+};
 
-	for (const file of originalFilenames) {
-		let filename = {
-			original: onlyFileName(file),
-			renamed: null,
-			extension: separateExtension(file)
-		};
-		mappedFilenames.push(filename);
+let twoDigitFormatter = (input) => {
+	if (input.length <= 2) {
+		return ("0" + input).slice(-2);
+	} else {
+		return input;
 	}
-	return mappedFilenames;
 };
 
 module.exports = {
-	replacePeriods,
-	replaceDashes,
 	separateExtension,
 	onlyFileName,
-	convertToFilenameObject
+	convertToFileNameObject,
+	twoDigitFormatter
 };

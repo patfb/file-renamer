@@ -1,19 +1,36 @@
-const assert = require("assert");
+const assert = require("chai").assert;
 r = require("../src/replacers");
 
 describe("replacers", function() {
-	const unchanged = "unchanged";
+	describe("twoDigitFormatter()", function() {
+		describe("when given a number", function() {
+			it("should return properly formatted number", function() {
+				assert.equal("01", r.twoDigitFormatter("1"));
+				assert.equal("12", r.twoDigitFormatter("12"));
+				assert.equal("100", r.twoDigitFormatter("100"));
+			});
+		});
+	});
 
-	describe("convertToFilenameObject()", function() {
+	describe("rename()", function() {
+		describe("when given an array of fileNameObjects", function() {
+			it("should rename the original files and save them in the object", function() {});
+		});
+	});
+
+	describe("convertToFileNameObject()", function() {
 		describe("when given an array of filenames", function() {
 			it("should return an array of filename objects", function() {
-				const original = ["file1.txt", "file2.txt"];
-				const expected = [
-					{ original: "file1", renamed: null, extension: ".txt" },
-					{ original: "file2", renamed: null, extension: ".txt" }
-				];
+				const expected = {
+					name: "file1",
+					renamed: null,
+					extension: ".txt"
+				};
 
-				assert.deepEqual(expected, r.convertToFilenameObject(original));
+				assert.deepEqual(
+					expected,
+					r.convertToFileNameObject("file1.txt")
+				);
 			});
 		});
 	});
@@ -30,32 +47,6 @@ describe("replacers", function() {
 		describe("when given a file", function() {
 			it("should return the extension", function() {
 				assert.equal(".mkv", r.separateExtension("something.mkv"));
-			});
-		});
-	});
-
-	describe("replaceDashes()", function() {
-		describe("when dash is present", function() {
-			it("should replace dash", function() {
-				assert.equal("some thing", r.replaceDashes("some-thing"));
-			});
-		});
-		describe("when dash is missing", function() {
-			it("should return original string", function() {
-				assert.equal(unchanged, r.replaceDashes(unchanged));
-			});
-		});
-	});
-
-	describe("replacePeriods()", function() {
-		describe("when period is present", function() {
-			it("should replace periods", function() {
-				assert.equal("some thing", r.replacePeriods("some.thing"));
-			});
-		});
-		describe("when period is missing", function() {
-			it("should return original string", function() {
-				assert.equal(unchanged, r.replacePeriods(unchanged));
 			});
 		});
 	});
