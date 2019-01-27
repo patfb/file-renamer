@@ -15,7 +15,9 @@ fs.readdirSync(process.cwd()).forEach((file) => {
 });
 
 console.log("Current files in this directory:");
-console.log(fileNames);
+for (const file of fileNames) {
+	console.log(`${file.name}${file.extension}`);
+}
 
 const baseFileName = readlineSync.question("Base file name: ");
 const seasonNumber = readlineSync.question("Season number: ");
@@ -31,8 +33,11 @@ let renamedFileNames = r.rename(
 );
 
 for (const file of renamedFileNames) {
+	console.log("Preview:");
 	console.log(
-		`${file.name}${file.extension} --> ${file.renamed}${file.extension}`
+		`${currentWorkingDirectory}\\${file.name}${
+			file.extension
+		} --> ${currentWorkingDirectory}\\${file.renamed}${file.extension}`
 	);
 }
 
