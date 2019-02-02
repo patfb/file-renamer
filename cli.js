@@ -9,7 +9,13 @@ let fileNames = [];
 
 const currentWorkingDirectory = process.cwd();
 
-fs.readdirSync(process.cwd()).forEach((file) => {
+let unsortedFiles = fs.readdirSync(process.cwd());
+console.log("Unsorted files:", unsortedFiles);
+
+let sortedFiles = unsortedFiles.sort();
+console.log("Sorted files:", sortedFiles);
+
+sortedFiles.forEach((file) => {
 	fileNameObject = r.convertToFileNameObject(file);
 	fileNames.push(fileNameObject);
 });
