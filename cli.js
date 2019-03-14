@@ -3,6 +3,7 @@
 const fs = require("fs");
 const r = require("./src/replacers");
 const readlineSync = require("readline-sync");
+const naturalSort = require("./node_modules/javascript-natural-sort/naturalSort");
 let fileNames = [];
 
 // process.cwd() gets current working directory that script was invoked from
@@ -10,10 +11,8 @@ let fileNames = [];
 const currentWorkingDirectory = process.cwd();
 
 let unsortedFiles = fs.readdirSync(process.cwd());
-console.log("Unsorted files:", unsortedFiles);
 
-let sortedFiles = unsortedFiles.sort();
-console.log("Sorted files:", sortedFiles);
+let sortedFiles = unsortedFiles.sort(naturalSort);
 
 sortedFiles.forEach((file) => {
 	fileNameObject = r.convertToFileNameObject(file);
@@ -26,24 +25,15 @@ for (const file of fileNames) {
 }
 
 const baseFileName = readlineSync.question("Base file name: ");
-const seasonNumber = readlineSync.question("Season number: ");
-const startingEpisodeNumber = readlineSync.question(
-	"Starting episode number: "
-);
+const startingNumber = readlineSync.question("Starting number: ");
 
-let renamedFileNames = r.rename(
-	fileNames,
-	baseFileName,
-	seasonNumber,
-	startingEpisodeNumber
-);
+let renamedFileNames = r.rename(fileNames, baseFileName, startingNumber);
 
+console.log("Preview:");
+console.log("Directory:", currentWorkingDirectory);
 for (const file of renamedFileNames) {
-	console.log("Preview:");
 	console.log(
-		`${currentWorkingDirectory}\\${file.name}${
-			file.extension
-		} --> ${currentWorkingDirectory}\\${file.renamed}${file.extension}`
+		`${file.name}${file.extension} --> ${file.renamed}${file.extension}`
 	);
 }
 

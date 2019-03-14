@@ -22,20 +22,15 @@ let twoDigitFormatter = (input) => {
 	}
 };
 
-let rename = (
-	fileNameObjects,
-	baseName,
-	seasonNumber,
-	startingEpisodeNumber
-) => {
-	let episodeNumber = startingEpisodeNumber;
+let rename = (fileNameObjects, baseName, startingNumber) => {
+	let startingNumberAsNumber = startingNumber;
 	let renamedArray = [];
 	for (const file of fileNameObjects) {
-		file.renamed = `${baseName} S${twoDigitFormatter(
-			seasonNumber.toString()
-		)}E${twoDigitFormatter(episodeNumber.toString())}`;
+		file.renamed = `${baseName} ${twoDigitFormatter(
+			startingNumberAsNumber.toString()
+		)}`;
 
-		episodeNumber++;
+		startingNumberAsNumber++;
 		renamedArray.push(file);
 	}
 	return renamedArray;

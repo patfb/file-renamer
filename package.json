@@ -12,6 +12,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"javascript-natural-sort": "^0.7.1",
 		"prompt": "^1.0.0",
 		"readline-sync": "^1.4.9",
 		"underscore.string": "^3.3.5"
