@@ -25,7 +25,8 @@ let twoDigitFormatter = input => {
 let rename = (fileNameObjects, baseName, startingNumber) => {
   let startingNumberAsNumber = startingNumber;
   let renamedArray = [];
-  for (const file of fileNameObjects) {
+  for (const [index, value] of fileNameObjects.entries()) {
+    console;
     file.renamed = `${baseName} ${twoDigitFormatter(
       startingNumberAsNumber.toString()
     )}`;

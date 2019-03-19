@@ -29,7 +29,7 @@ describe("replacers", function() {
           }
         ];
 
-        assert.deepEqual(expected, r.rename(original, "New File Name", 1));
+        assert.deepEqual(expected, r.rename(original, "New File Name S01E", 1));
       });
     });
   });
