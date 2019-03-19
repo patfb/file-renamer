@@ -1,10 +1,10 @@
 const assert = require("chai").assert;
 r = require("../src/replacers");
 
-describe("replacers", function() {
-  describe("rename()", function() {
-    describe("when given an array of filename objects", function() {
-      it("should populate the rename field with new file name", function() {
+describe("replacers", () => {
+  describe("rename()", () => {
+    describe("when given an array of filename objects", () => {
+      it("should populate the rename field with new file name", () => {
         let original = [
           { name: "first", renamed: null, extension: ".txt" },
           { name: "second", renamed: null, extension: ".txt" },
@@ -14,17 +14,17 @@ describe("replacers", function() {
         let expected = [
           {
             name: "first",
-            renamed: "New File Name 01",
+            renamed: "New File Name S01E01",
             extension: ".txt"
           },
           {
             name: "second",
-            renamed: "New File Name 02",
+            renamed: "New File Name S01E02",
             extension: ".txt"
           },
           {
             name: "third",
-            renamed: "New File Name 03",
+            renamed: "New File Name S01E03",
             extension: ".txt"
           }
         ];
@@ -34,19 +34,21 @@ describe("replacers", function() {
     });
   });
 
-  describe("twoDigitFormatter()", function() {
-    describe("when given a number", function() {
-      it("should return properly formatted number", function() {
-        assert.equal("01", r.twoDigitFormatter("1"));
-        assert.equal("12", r.twoDigitFormatter("12"));
-        assert.equal("102", r.twoDigitFormatter("102"));
-      });
+  describe("minimumTwoDigitFormatter()", () => {
+    it("should properly format a 1 digit number", () => {
+      assert.strictEqual("01", r.minimumTwoDigitFormatter(1));
+    });
+    it("should properly format a 2 digit number", () => {
+      assert.strictEqual("12", r.minimumTwoDigitFormatter(12));
+    });
+    it("should properly format a 3 digit number ", () => {
+      assert.strictEqual("102", r.minimumTwoDigitFormatter(102));
     });
   });
 
-  describe("convertToFileNameObject()", function() {
-    describe("when given an array of filenames", function() {
-      it("should return an array of filename objects", function() {
+  describe("convertToFileNameObject()", () => {
+    describe("when given an array of filenames", () => {
+      it("should return an array of filename objects", () => {
         const expected = {
           name: "file1",
           renamed: null,
@@ -58,17 +60,17 @@ describe("replacers", function() {
     });
   });
 
-  describe("separateFileName()", function() {
-    describe("when given a file", function() {
-      it("should return the file name without the extension", function() {
+  describe("separateFileName()", () => {
+    describe("when given a file", () => {
+      it("should return the file name without the extension", () => {
         assert.equal("something", r.separateFileName("something.mkv"));
       });
     });
   });
 
-  describe("separateExtension()", function() {
-    describe("when given a file", function() {
-      it("should return the extension", function() {
+  describe("separateExtension()", () => {
+    describe("when given a file", () => {
+      it("should return the extension", () => {
         assert.equal(".mkv", r.separateExtension("something.mkv"));
       });
     });

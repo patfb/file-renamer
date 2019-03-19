@@ -14,24 +14,15 @@ let convertToFileNameObject = originalFileName => {
   };
 };
 
-let twoDigitFormatter = input => {
-  if (input.length <= 2) {
-    return ("0" + input).slice(-2);
-  } else {
-    return input;
-  }
+let minimumTwoDigitFormatter = input => {
+  return input > 9 ? input.toString() : "0" + input;
 };
 
 let rename = (fileNameObjects, baseName, startingNumber) => {
-  let startingNumberAsNumber = startingNumber;
   let renamedArray = [];
-  for (const [index, value] of fileNameObjects.entries()) {
-    console;
-    file.renamed = `${baseName} ${twoDigitFormatter(
-      startingNumberAsNumber.toString()
-    )}`;
-
-    startingNumberAsNumber++;
+  for (const file of fileNameObjects) {
+    file.renamed = `${baseName}${minimumTwoDigitFormatter(startingNumber)}`;
+    startingNumber++;
     renamedArray.push(file);
   }
   return renamedArray;
@@ -39,8 +30,8 @@ let rename = (fileNameObjects, baseName, startingNumber) => {
 
 module.exports = {
   separateExtension,
-  separateFileName: separateFileName,
+  separateFileName,
   convertToFileNameObject,
-  twoDigitFormatter,
+  minimumTwoDigitFormatter,
   rename
 };
